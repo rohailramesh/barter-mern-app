@@ -1,0 +1,18 @@
+To hash passwords you can use the bcrypt library and its functions. 
+I used this in the user.model.js to hash the user password in a pre-save hook when a new user is being created through signup
+
+To authenticate a user, there will be an access token and a refresh token which will be stored in a cookie. The refresh token for user will also be saved to redis DB for faster access
+
+When user logouts, the tokens must be cleared from the cookie and also the refresh token stored in the redis should also be removed
+
+
+When the user logs in, we compare their password with the hashed password using our ealier pre-hook in user models. Then we have to refresh their access token which has a short lifespan for safety reasons. To ensure we refresh the right access token by authenticated user, we use the refresh token stored in redis and if it matches then we create a new access token
+
+when user is logged in we need to verify their access token which has a short lifespan to prevent any harmful activities. we can do that by usinng the refresh token stored in redis and also comparing the current access token with the secret_refresh_key with jwt.verify to first verify if it is the authenticated user or not.
+  //get the refresh token from the cookie
+  //if the token is not found return 401
+  //else verify the token using jwt with the secret key
+  //get the stored refresh token from redis
+  //compare the token with the stored refresh token
+  //if the token is not found return 401
+  //else generate a new access token and set the cookie
