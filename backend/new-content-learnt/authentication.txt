@@ -16,3 +16,5 @@ when user is logged in we need to verify their access token which has a short li
   //compare the token with the stored refresh token
   //if the token is not found return 401
   //else generate a new access token and set the cookie
+
+Adding middlewares to authenticate user and check if they are admin to carry out necessary functionalities
