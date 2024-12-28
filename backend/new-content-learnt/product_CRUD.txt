@@ -1,0 +1,18 @@
+1. Setup Product model
+2. Create product routes and controllers
+3. Add middlewares where needed
+4. Add product api route to server.js
+
+
+How next() is used in middlewares ->
+Use case: Let admin create new user
+1. First middleware is to check if user is logged in
+2. Second middleware is to check if logged in user is admin
+3. Create new user function is executed
+
+So next() basically moves from one middleware to next and then to controller
+
+eg: in admin.routes.js
+router.post("/create-user", checkLoggedIn, checkAdminStatus, createUser)
+
+so it first runs checkLoggedIn function then moves next to checkAdminStatus and then next to createUser
