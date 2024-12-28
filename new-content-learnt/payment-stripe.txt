@@ -1,0 +1,6 @@
+using stripe for payments when user orders
+payment.model.js
+payment,controller.js
+payment.route.js
+stripe keys
+stripe.js
