@@ -1,0 +1,12 @@
+Working with React Router
+React-Router-Dom has different elements to use:
+- Navigate
+- BrowserRouter
+- Routes
+- Route
+- Link
+1. Wrap the entire app (main.jsx) with <BrowserRouter>
+2. Add different routes within the <Routes> in App.jsx
+Eg: 
+<Routes>
+    <Route path="/home" element={<HomePage/>}/>
