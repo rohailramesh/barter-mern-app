@@ -2,10 +2,20 @@ import { Navigate, Route, Routes } from "react-router-dom";
 
 // Pages import
 import HomePage from "./pages/HomePage";
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
+import AdminPage from "./pages/AdminPage";
+import CategoryPage from "./pages/CategoryPage";
+import PurchaseSuccessfulPage from "./pages/PurchaseSuccessfulPage";
+import PurchaseCancelPage from "./pages/PurchaseCancelPage";
+import CartPage from "./pages/CartPage";
 // Components import
 import Navbar from "./components/Navbar";
+import { Toaster } from "react-hot-toast";
 
 function App() {
+  const userLoggedIn = true;
+  const userLoggedInIsAdmin = false;
   return (
     <>
       <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
@@ -20,8 +30,44 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route
+              path="/signup"
+              element={!userLoggedIn ? <SignUpPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/login"
+              element={!userLoggedIn ? <LoginPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/admin"
+              element={
+                userLoggedInIsAdmin ? <AdminPage /> : <Navigate to="/login" />
+              }
+            />
+            <Route path="/category/:category" element={<CategoryPage />} />
+            <Route
+              path="/cart"
+              element={userLoggedIn ? <CartPage /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/purchase-successful"
+              element={
+                userLoggedIn ? (
+                  <PurchaseSuccessfulPage />
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/purchase-cancel"
+              element={
+                userLoggedIn ? <PurchaseCancelPage /> : <Navigate to="/login" />
+              }
+            />
           </Routes>
         </div>
+        <Toaster />
       </div>
     </>
   );

@@ -1,0 +1,4 @@
+Instead of prop drilling, using Zustand to create stores and accessing variables and functions anywhere globally frontend
+
+example of creating a store:
+export const useUserStore = create((set, get) => ({functions and variables}))

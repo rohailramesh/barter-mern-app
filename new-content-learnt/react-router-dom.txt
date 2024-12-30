@@ -10,3 +10,18 @@ React-Router-Dom has different elements to use:
 Eg: 
 <Routes>
     <Route path="/home" element={<HomePage/>}/>
+
+
+Flow of routes and links
+- Routes are set in App.jsx
+- Links are created to navigate to a specific route within the routes
+Eg in App.js:
+<Routes>
+    <Route path="/login" element={<LoginPage}/>
+</Routes>
+
+
+Eg in Navbar.js:
+<Link to={"/login"}>Login</Link>
+
+So when the user clicks on the "Login" link in the navbar, it will bring them to the /login route.

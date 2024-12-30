@@ -2,7 +2,7 @@ import { ShoppingCart, UserPlus, LogIn, LogOut, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 const Navbar = () => {
   const userLoggedIn = true;
-  const userLoggedInIsAdmin = true;
+  const userLoggedInIsAdmin = false;
 
   return (
     <header className="fixed top-0 left-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md shadow-lg z-40 transition-all duration-300 border-b border-emerald-800">
@@ -55,7 +55,7 @@ const Navbar = () => {
               <Link
                 className="bg-emerald-700 hover:bg-emerald-600 text-white px-3 py-1 rounded-md font-medium
 								 transition duration-300 ease-in-out flex items-center"
-                to={"/secret-dashboard"}
+                to={"/admin"}
               >
                 <Lock className="inline-block mr-1" size={18} />
                 <span className="hidden sm:inline">Dashboard</span>
