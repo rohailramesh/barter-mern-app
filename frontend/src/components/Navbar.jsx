@@ -1,7 +1,7 @@
 import { ShoppingCart, UserPlus, LogIn, LogOut, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 const Navbar = () => {
-  const userLoggedIn = true;
+  const userLoggedIn = false;
   const userLoggedInIsAdmin = false;
 
   return (

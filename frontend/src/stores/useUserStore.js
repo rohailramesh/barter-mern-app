@@ -7,7 +7,7 @@ export const useUserStore = create((set, get) => ({
   loading: false,
   checkingAuth: true,
 
-  signup: async (name, email, password, confirmPassword) => {
+  signup: async ({ name, email, password, confirmPassword }) => {
     set({ loading: true }); //indicates that an asynchronous operation is in progress which is used to display a loading indicator
     if (password !== confirmPassword) {
       set({ loading: false });
@@ -19,9 +19,12 @@ export const useUserStore = create((set, get) => ({
         email,
         password,
       });
-      set({ user: res.data });
+      set({ user: res.data, loading: false });
+      toast.success("Account created successfully");
     } catch (error) {
       set({ loading: false });
+      console.log(error);
+
       return toast.error(error.response.data.message || "An error occurred");
     }
   },

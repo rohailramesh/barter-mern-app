@@ -9,31 +9,29 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Name is a required field"],
+      required: [true, "Name is required"],
     },
     email: {
       type: String,
-      required: [true, "Email is a required field"],
+      required: [true, "Email is required"],
       unique: true,
       lowercase: true,
       trim: true,
     },
     password: {
-      //need a pre-save hook to hash the password
       type: String,
-      required: [true, "Password is a required field"],
-      minLength: [6, "Password must be at least 6 characters long"],
+      required: [true, "Password is required"],
+      minlength: [6, "Password must be at least 6 characters long"],
     },
-    cartItem: [
-      // cartItem will be an array of products and quantity of default value of 1
+    cartItems: [
       {
-        product: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
-        },
         quantity: {
           type: Number,
           default: 1,
+        },
+        product: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Product",
         },
       },
     ],
@@ -48,11 +46,10 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// pre-save hook to hash the password
+// Pre-save hook to hash password before saving to database
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    return next(); // if the password is not modified, move to next middleware
-  }
+  if (!this.isModified("password")) return next();
+
   try {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
@@ -62,10 +59,10 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-// function to copmare hashed value and password
 userSchema.methods.comparePassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
 const User = mongoose.model("User", userSchema);
+
 export default User;

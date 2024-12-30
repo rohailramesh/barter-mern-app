@@ -1,0 +1,24 @@
+There is two ways to handle CORS policy error when sending data from frontend to backend
+
+1. Install CORS package in backend and add it to server.js 
+
+app.use(
+  cors({
+    origin: "url of frontend here",
+    credentials: true,
+  })
+);
+
+2. create a poxy in vite.config.js (doesn't seem to work)
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:5001",
+      },
+    },
+    port: 3000, //lets you change the server frontend is running on
+  },
+});

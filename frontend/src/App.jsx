@@ -14,7 +14,7 @@ import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
 
 function App() {
-  const userLoggedIn = true;
+  const userLoggedIn = false;
   const userLoggedInIsAdmin = false;
   return (
     <>
