@@ -7,19 +7,33 @@ export const useProductStore = create((set, get) => ({
   loading: false,
 
   setProducts: (products) => set({ products }),
-  createProduct: async (product) => {
+  // createProduct: async (product) => {
+  //   set({ loading: true });
+  //   try {
+  //     const res = await axios.post("/products", product);
+  //     set((prevState) => ({
+  //       products: [...prevState.products, res.data],
+  //       loading: false,
+  //     }));
+  //   } catch (error) {
+  //     toast.error(
+  //       error.response.data.message ||
+  //         "An error occurred - Product could not be created"
+  //     );
+  //     set({ loading: false });
+  //   }
+  // },
+  createProduct: async (productData) => {
     set({ loading: true });
     try {
-      const res = await axios.post("/products", product);
+      const res = await axios.post("/products", productData);
       set((prevState) => ({
         products: [...prevState.products, res.data],
         loading: false,
       }));
+      toast.success("Product created successfully");
     } catch (error) {
-      toast.error(
-        error.response.data.message ||
-          "An error occurred - Product could not be created"
-      );
+      toast.error(error.response.data.error);
       set({ loading: false });
     }
   },
