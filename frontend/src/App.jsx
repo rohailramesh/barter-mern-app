@@ -55,7 +55,7 @@ function App() {
             element={!user ? <LoginPage /> : <Navigate to="/" />}
           />
           <Route
-            path="/secret-dashboard"
+            path="/admin"
             element={
               user?.role === "admin" ? <AdminPage /> : <Navigate to="/login" />
             }

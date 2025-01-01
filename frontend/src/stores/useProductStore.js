@@ -95,6 +95,7 @@ export const useProductStore = create((set, get) => ({
       set({ products: res.data, loading: false });
     } catch (error) {
       set({ loading: false });
+      console.log(error);
       toast.error(
         error.response.data.message ||
           "An error occurred - Products could not be fetched"
