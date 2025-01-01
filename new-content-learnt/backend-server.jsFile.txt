@@ -1,0 +1,3 @@
+When a request from frontend is sent to server especially with a payload, you need to set a limit on the size of how much can you parse that request. If not done, error like payload too big will be given.
+
+app.use(express.json({limit: "10mb"}));
