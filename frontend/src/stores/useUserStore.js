@@ -44,7 +44,7 @@ export const useUserStore = create((set, get) => ({
       set({ user: null });
     } catch (error) {
       toast.error(
-        error.response.data.message || "An error occurred during logout"
+        error.response?.data?.message || "An error occurred during logout"
       );
     }
   },
