@@ -1,0 +1,4 @@
+To add and use env variables in frontend which is Vite React
+1. Create a .env file in frontend folder (even if you have one for backend)
+2.Add your keys but the variable should start with "VITE_"
+3.Use that env variable in your components/pages as import.meta.env.VITE_VAR_NAME
