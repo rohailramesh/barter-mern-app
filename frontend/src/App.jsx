@@ -1,22 +1,20 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
-// Pages import
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/AdminPage";
 import CategoryPage from "./pages/CategoryPage";
-import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
-import PurchaseCancelPage from "./pages/PurchaseCancelPage";
-import CartPage from "./pages/CartPage";
-// Components import
+
 import Navbar from "./components/Navbar";
 import { Toaster } from "react-hot-toast";
-import LoadingSpinner from "./components/LaodingSpinner";
-//store import
 import { useUserStore } from "./stores/useUserStore";
-import { useCartStore } from "./stores/useCartStore";
 import { useEffect } from "react";
+import LoadingSpinner from "./components/LoadingSpinner";
+import CartPage from "./pages/CartPage";
+import { useCartStore } from "./stores/useCartStore";
+import PurchaseSuccessPage from "./pages/PurchaseSuccessPage";
+import PurchaseCancelPage from "./pages/PurchaseCancelPage";
 
 function App() {
   const { user, checkAuth, checkingAuth } = useUserStore();
@@ -55,7 +53,7 @@ function App() {
             element={!user ? <LoginPage /> : <Navigate to="/" />}
           />
           <Route
-            path="/admin"
+            path="/secret-dashboard"
             element={
               user?.role === "admin" ? <AdminPage /> : <Navigate to="/login" />
             }

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 
-// This is a tempplate where we will pass the category list in homepage and use it here
 const CategoryItem = ({ category }) => {
   return (
     <div className="relative overflow-hidden h-96 w-full rounded-lg group">

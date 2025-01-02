@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import { UserPlus, Mail, Lock, User, ArrowRight, Loader } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "../stores/useUserStore";
-// import { useNavigate } from "react-router";
+
 const SignUpPage = () => {
-  // let navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,14 +17,6 @@ const SignUpPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     signup(formData);
-    setFormData({
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
-    //once the form is submitted, reset the form and redirect to the login page using
-    // navigate("/login");
   };
 
   return (

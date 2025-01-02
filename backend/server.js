@@ -8,7 +8,7 @@ import productRoutes from "./routes/product.route.js";
 import couponRoutes from "./routes/coupon.route.js";
 import cartRoutes from "./routes/cart.route.js";
 import paymentRoutes from "./routes/payment.route.js";
-import analyticRoutes from "./routes/analytics.route.js";
+import analyticsRoutes from "./routes/analytics.route.js";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -23,10 +23,10 @@ app.use(cookieParser());
 //routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
-app.use("/api/coupons", couponRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/coupons", couponRoutes);
 app.use("/api/payments", paymentRoutes);
-app.use("/api/analytics", analyticRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 app.listen(PORT, () => {
   console.log("Server is running on http://localhost:" + PORT);

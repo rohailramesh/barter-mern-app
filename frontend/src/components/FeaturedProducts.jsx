@@ -1,27 +1,24 @@
 import { useEffect, useState } from "react";
-import { ShoppingCart, ChevronRight, ChevronLeft } from "lucide-react";
+import { ShoppingCart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCartStore } from "../stores/useCartStore";
+
 const FeaturedProducts = ({ featuredProducts }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(4);
+
   const { addToCart } = useCartStore();
 
-  // useEffect to handle number of items per page when size of screen changes
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setItemsPerPage(1);
-      } else if (window.innerWidth < 1024) {
-        setItemsPerPage(2);
-      } else {
-        setItemsPerPage(4);
-      }
+      if (window.innerWidth < 640) setItemsPerPage(1);
+      else if (window.innerWidth < 1024) setItemsPerPage(2);
+      else if (window.innerWidth < 1280) setItemsPerPage(3);
+      else setItemsPerPage(4);
     };
+
     handleResize();
     window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const nextSlide = () => {
@@ -34,6 +31,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
 
   const isStartDisabled = currentIndex === 0;
   const isEndDisabled = currentIndex >= featuredProducts.length - itemsPerPage;
+
   return (
     <div className="py-12">
       <div className="container mx-auto px-4">
@@ -112,5 +110,4 @@ const FeaturedProducts = ({ featuredProducts }) => {
     </div>
   );
 };
-
 export default FeaturedProducts;

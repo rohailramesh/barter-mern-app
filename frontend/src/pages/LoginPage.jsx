@@ -3,20 +3,17 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { LogIn, Mail, Lock, ArrowRight, Loader } from "lucide-react";
 import { useUserStore } from "../stores/useUserStore";
-// import { useNavigate } from "react-router-dom";
+
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const { login, loading } = useUserStore();
-  // const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(email, password);
     login(email, password);
-    setEmail("");
-    setPassword("");
-    // navigate("/");
-    console.log("Login successful");
   };
 
   return (
@@ -28,7 +25,7 @@ const LoginPage = () => {
         transition={{ duration: 0.8 }}
       >
         <h2 className="mt-6 text-center text-3xl font-extrabold text-emerald-400">
-          Login To Barter
+          Create your account
         </h2>
       </motion.div>
 
