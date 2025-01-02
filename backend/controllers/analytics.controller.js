@@ -2,34 +2,31 @@ import Order from "../models/order.model.js";
 import Product from "../models/product.model.js";
 import User from "../models/user.model.js";
 
-export const getAnalyticsData = async (req, res) => {
-  //total users, total products, total revenue, total sales
-  try {
-    const totalUsers = await User.countDocuments();
-    const totalProducts = await Product.countDocuments();
-    const salesData = await Order.aggregate([
-      {
-        $group: {
-          _id: null,
-          totalSales: { $sum: 1 },
-          totalRevenue: { $sum: "$totalAmount" },
-        },
+export const getAnalyticsData = async () => {
+  const totalUsers = await User.countDocuments();
+  const totalProducts = await Product.countDocuments();
+
+  const salesData = await Order.aggregate([
+    {
+      $group: {
+        _id: null, // it groups all documents together,
+        totalSales: { $sum: 1 },
+        totalRevenue: { $sum: "$totalAmount" },
       },
-    ]);
-    const { totalSales, totalRevenue } = salesData[0] || {
-      totalSales: 0,
-      totalRevenue: 0,
-    };
-    res.json({
-      users: totalUsers,
-      products: totalProducts,
-      totalSales,
-      totalRevenue,
-    });
-  } catch (error) {
-    console.log("Error in getAnalyticsData controller", error.message);
-    res.status(500).json({ message: error.message });
-  }
+    },
+  ]);
+
+  const { totalSales, totalRevenue } = salesData[0] || {
+    totalSales: 0,
+    totalRevenue: 0,
+  };
+
+  return {
+    users: totalUsers,
+    products: totalProducts,
+    totalSales,
+    totalRevenue,
+  };
 };
 
 export const getDailySalesData = async (startDate, endDate) => {
