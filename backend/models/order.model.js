@@ -32,6 +32,7 @@ const orderSchema = new mongoose.Schema(
     },
     stripeSessionId: {
       type: String,
+      unique: true,
       required: true,
     },
   },

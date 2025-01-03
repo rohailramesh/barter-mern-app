@@ -75,6 +75,7 @@ export const useCartStore = create((set, get) => ({
       cart: prevState.cart.filter((item) => item._id !== productId),
     }));
     get().calculateTotals();
+    toast.success("Product removed from cart");
   },
   updateQuantity: async (productId, quantity) => {
     if (quantity === 0) {
@@ -89,6 +90,7 @@ export const useCartStore = create((set, get) => ({
       ),
     }));
     get().calculateTotals();
+    toast.success("Product quantity updated");
   },
   calculateTotals: () => {
     const { cart, coupon } = get();
